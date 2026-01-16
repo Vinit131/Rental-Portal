@@ -1,0 +1,114 @@
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+        <h2>{{customer.name}}</h2>
+        <p class="text-muted">{{customer.email}}</p>
+    </div>
+
+    <div ng-if="successMessage" class="alert alert-success" role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        {{successMessage}}
+    </div>
+
+    <div ng-if="errorMessage" class="alert alert-danger" role="alert">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        {{errorMessage}}
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4>Personal Information</h4>
+        <button class="btn btn-outline-primary" ng-click="toggleEdit()" ng-if="!isEditing">
+            <i class="fas fa-edit me-2"></i>Edit Profile
+        </button>
+    </div>
+
+    <form name="profileForm" ng-submit="updateProfile()">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Full Name</label>
+                <input type="text" 
+                       class="form-control" 
+                       ng-model="customer.name"
+                       ng-disabled="!isEditing"
+                       required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Email Address</label>
+                <input type="email" 
+                       class="form-control" 
+                       ng-model="customer.email"
+                       ng-disabled="!isEditing"
+                       required>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Phone Number</label>
+                <input type="tel" 
+                       class="form-control" 
+                       ng-model="customer.phone"
+                       ng-disabled="!isEditing"
+                       pattern="[0-9]{10}"
+                       required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Customer ID</label>
+                <input type="text" 
+                       class="form-control" 
+                       value="{{customer.id}}"
+                       disabled>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Address</label>
+            <textarea class="form-control" 
+                      ng-model="customer.address"
+                      ng-disabled="!isEditing"
+                      rows="3"
+                      required></textarea>
+        </div>
+
+        <div ng-if="isEditing" class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">
+                <i class="fas fa-save me-2"></i>Save Changes
+            </button>
+            <button type="button" class="btn btn-secondary flex-fill" ng-click="toggleEdit()">
+                <i class="fas fa-times me-2"></i>Cancel
+            </button>
+        </div>
+    </form>
+
+    <hr class="my-4">
+
+    <!-- Additional Sections -->
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card border-0 bg-light h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-shopping-bag text-primary me-2"></i>
+                        My Orders
+                    </h5>
+                    <p class="card-text text-muted">View and manage your rental orders</p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">View Orders</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card border-0 bg-light h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-heart text-danger me-2"></i>
+                        Wishlist
+                    </h5>
+                    <p class="card-text text-muted">Products you've saved for later</p>
+                    <a href="#" class="btn btn-sm btn-outline-primary">View Wishlist</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
